@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
+const Movie = require('./backend/models/movie');
 
 // ----- DB Connection -----
 const dbOptions = { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true, auto_reconnect: true };
@@ -16,11 +18,25 @@ const app = express();
 
 app.use(express.static(__dirname + '/dist/AtlasMovie'));
 app.use(express.json());
+app.use(cors());
 
 
+app.get('/api/movies', async (req, res) => {
+    let cond = {};
+    if(req.query.year){
+        cond.year = +req.query.year;  // {year: 2000} parseInt
+    }
+    let options = {skip:0, limit:12};
+    try{
+        let moviesList = await Movie.find(cond, null, options);
+        res.json(moviesList);
+    }catch{
+        res.status(500).json([]);
+    }
 
-app.get('/api/movies', (req, res) => {
-    
+    /*Movie.find(cond, null, options, (err, data)=>{
+
+    })*/    
 });
 
 

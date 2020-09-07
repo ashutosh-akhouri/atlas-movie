@@ -1,0 +1,13 @@
+<div class="card-deck">
+    <div *ngFor="let m of movies; let i = index" class="card movie-card">
+        <img [src]="m.poster" class="card-img-top img-fluid" onerror="this.src='https://via.placeholder.com/150';">
+        <div class="card-body">
+            <h5 class="card-title">{{m.title}}</h5>
+            <div class="d-flex justify-content-between">
+                <span>{{m.year}}</span>
+                <span>{{m.imdb.rating}}</span>
+            </div>
+            <button class="btn btn-warning btn-block" (click)="addToCart(i)">Add to cart</button>
+        </div>
+    </div>
+</div>
