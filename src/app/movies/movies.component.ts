@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movies',
@@ -9,7 +10,9 @@ export class MoviesComponent implements OnInit {
 
   @Input() movies;
 
-  constructor() { }
+  fontsize = 20;
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -18,4 +21,11 @@ export class MoviesComponent implements OnInit {
     console.log("Added to cart: " + idx);
   }
 
+  switchToMovieDetail(i){
+    let mov = this.movies[i];
+    alert('movieDetail/'+mov._id);
+    this.router.navigateByUrl('movieDetail/'+mov._id);
+  }
+
+  
 }

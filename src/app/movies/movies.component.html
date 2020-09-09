@@ -1,13 +1,15 @@
 <div class="card-deck">
     <div *ngFor="let m of movies; let i = index" class="card movie-card">
-        <img [src]="m.poster" class="card-img-top img-fluid" onerror="this.src='https://via.placeholder.com/150';">
+        <a (click)="switchToMovieDetail(i)">
+            <img [src]="m.poster" class="card-img-top img-fluid" onerror="this.src='https://via.placeholder.com/150';">
+        </a>
         <div class="card-body">
-            <h5 class="card-title">{{m.title}}</h5>
+            <h5 [ngClass]="{'title-blue': i%2==0, 'title-red': i%2==1}" class="card-title">{{m.title}}</h5>
             <div class="d-flex justify-content-between">
-                <span>{{m.year}}</span>
+                <span [ngStyle]="{'font-size.px': fontsize}">{{m.year}}</span>
                 <span>{{m.imdb.rating}}</span>
             </div>
-            <button class="btn btn-warning btn-block" (click)="addToCart(i)">Add to cart</button>
+            <button class=" btn btn-warning btn-block" (click)="addToCart(i)">Add to cart</button>
         </div>
     </div>
 </div>

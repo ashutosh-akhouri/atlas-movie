@@ -39,6 +39,19 @@ app.get('/api/movies', async (req, res) => {
     })*/    
 });
 
+app.get('/api/movies/:id', async (req, res)=>{
+    let id = req.params.id;
+    let objId = mongoose.Types.ObjectId(id);
+    console.log(id);
+    console.log(objId);
+    try{
+        let movie = await Movie.findById(objId);
+        res.json(movie);
+    }catch{
+        res.status(500).json({});
+    }
+})
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Express server started listening at ${PORT} port.`));
